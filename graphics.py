@@ -149,6 +149,25 @@ http://mcsp.wartburg.edu/zelle/python for a quick reference"""
 #     Added ability to set text atttributes.
 #     Added Entry boxes.
 
+##from graphics_extended import Rotation
+
+class Rotation():
+
+    """2D coordinate rotations"""
+
+    def __init__(self,cx,cy,theta):
+        self.cx = cx
+        self.cy = cy
+        self.mat = [[math.cos(theta),-math.sin(theta),cx],[math.sin(theta),math.cos(theta),cy],[0,0,1]]
+        
+
+    def resX(self,point):
+        return point.x*self.mat[0][0]+point.y*self.mat[0][1] + self.mat[0][2]
+
+    def resY(self,point):
+        return point.x*self.mat[1][0] + point.y*self.mat[1][1] + self.mat[1][2]
+import math
+
 import time, os, sys
 
 try:  # import as appropriate for 2.x vs. 3.x
@@ -468,7 +487,14 @@ class GraphicsObject:
             self.canvas.move(self.id, x, y)
             if canvas.autoflush:
                 _root.update()
-           
+
+    def rotate(self,cx,cy,theta):
+        self._rotate(cx,cy,theta)
+        canvas = self.canvas
+        if canvas and not canvas.isClosed():
+           if self.canvas.autoflush:
+               _root.update()
+            
     def _reconfig(self, option, setting):
         # Internal method for changing configuration of the object
         # Raises an error if the option does not exist in the config
@@ -507,6 +533,11 @@ class Point(GraphicsObject):
     def _move(self, dx, dy):
         self.x = self.x + dx
         self.y = self.y + dy
+
+    def _rotate(self,cx,cy,theta):
+        self.rot = Rotation(cx,cy,theta)
+        self.x = self.rot.resX(self)
+        self.y = self.rot.resY(self)
         
     def clone(self):
         other = Point(self.x,self.y)
@@ -654,6 +685,10 @@ class Polygon(GraphicsObject):
     def _move(self, dx, dy):
         for p in self.points:
             p.move(dx,dy)
+
+    def _rotate(self,cx,cy,theta):
+        for p in self.points:
+            p.rotate(cx,cy,theta)
    
     def _draw(self, canvas, options):
         args = [canvas]

@@ -32,7 +32,7 @@ class Node:
         return ((self.x-otherNode.x)**2+(self.y-otherNode.y)**2)**.5
 
     def addNeighbor(otherNode):
-        neighbors[otherNode]: findDist(otherNode)
+        neighbors[otherNode]= findDist(otherNode)
 
 ######################################################
 
@@ -61,12 +61,13 @@ class Ship(visualObject):
 class PlayerShip(Ship):
     def __init__(self,x,y):
         Ship.__init__(self,x,y,50,25,0)
-        
+    
+    
 class Map:
     visObjs = []
     NodeLst = []
     
 
     
-def main():
+#def main():
     
