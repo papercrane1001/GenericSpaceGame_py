@@ -1,5 +1,7 @@
 from graphics import *
 
+import tkinter as tk
+
 ##class Rotation():
 ##
 ##    """2D coordinate rotations"""
@@ -37,6 +39,29 @@ trns = Transform(500,500,0,499,499,0)
 
 tri = Polygon([Point(10,10),Point(10,50),Point(50,10)])
 tri.draw(win)
-##tri.move(100,0)
-tri.rotate(250,250,3.14)
 win.getMouse()
+tri.move(100,0)
+##tri.rotate(250,250,3.14)
+##print("Attempted rotate")
+win.getMouse()
+
+
+'''New approach:  I can't directly add a rotate function because tkinter
+is a Python GUI library, and the attached graphics_py file just adds some
+easy to understand functions.
+Instead, our graphics objects will be treated as a collection of points
+and a list of rules for connecting them.
+I may end up scrapping most of the graphics_py file.'''
+
+
+
+
+
+
+
+
+
+
+
+
+

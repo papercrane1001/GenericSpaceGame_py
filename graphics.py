@@ -488,12 +488,12 @@ class GraphicsObject:
             if canvas.autoflush:
                 _root.update()
 
-    def rotate(self,cx,cy,theta):
-        self._rotate(cx,cy,theta)
-        canvas = self.canvas
-        if canvas and not canvas.isClosed():
-           if self.canvas.autoflush:
-               _root.update()
+##    def rotate(self,cx,cy,theta):
+##        self._rotate(cx,cy,theta)
+##        canvas = self.canvas
+##        if canvas and not canvas.isClosed():
+##           if self.canvas.autoflush:
+##               _root.update()
             
     def _reconfig(self, option, setting):
         # Internal method for changing configuration of the object
@@ -534,10 +534,10 @@ class Point(GraphicsObject):
         self.x = self.x + dx
         self.y = self.y + dy
 
-    def _rotate(self,cx,cy,theta):
-        self.rot = Rotation(cx,cy,theta)
-        self.x = self.rot.resX(self)
-        self.y = self.rot.resY(self)
+##    def _rotate(self,cx,cy,theta):
+##        self.rot = Rotation(cx,cy,theta)
+##        self.x = self.rot.resX(self)
+##        self.y = self.rot.resY(self)
         
     def clone(self):
         other = Point(self.x,self.y)
@@ -686,9 +686,9 @@ class Polygon(GraphicsObject):
         for p in self.points:
             p.move(dx,dy)
 
-    def _rotate(self,cx,cy,theta):
-        for p in self.points:
-            p.rotate(cx,cy,theta)
+##    def _rotate(self,cx,cy,theta):
+##        for p in self.points:
+##            p.rotate(cx,cy,theta)
    
     def _draw(self, canvas, options):
         args = [canvas]
